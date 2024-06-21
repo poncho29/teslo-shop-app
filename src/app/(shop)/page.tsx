@@ -1,7 +1,12 @@
+import { Title } from "@/components";
+
 export default function ShopPage() {
   return (
     <div>
-      <h1>Shop Page</h1>
+      <Title 
+        title="Tienda"
+        subtitle="Todos los productos"
+      />
     </div>
   );
 }
