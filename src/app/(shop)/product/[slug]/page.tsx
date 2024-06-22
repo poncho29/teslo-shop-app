@@ -2,7 +2,12 @@ import { notFound } from "next/navigation";
 
 import { titleFont } from "@/config/fonts";
 
-import { ProductSlideshow, QuantitySelector, SizeSelector } from "@/components";
+import { 
+  ProductMobileSlideshow,
+  ProductSlideshow,
+  QuantitySelector,
+  SizeSelector
+} from "@/components";
 
 import { initialData } from "@/seed/seed";
 
@@ -21,9 +26,16 @@ export default function ProductPage({ params }: Props) {
   return (
     <div className="grid gap-3 mt-5 mb-20 md:grid-cols-3 ">
       <div className="col-span-1 md:col-span-2">
+        <ProductMobileSlideshow
+          title={product.title}
+          images={product.images}
+          className="block md:hidden"
+        />
+
         <ProductSlideshow
           title={product.title}
           images={product.images}
+          className="hidden md:block"
         />
       </div>
 
@@ -41,7 +53,7 @@ export default function ProductPage({ params }: Props) {
           availableSizes={product.sizes}
         />
 
-        <QuantitySelector quantity={3} />
+        <QuantitySelector quantity={0} />
 
         <button className="btn-primary my-5">
           Agregar al carrito

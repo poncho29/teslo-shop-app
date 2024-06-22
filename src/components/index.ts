@@ -2,6 +2,7 @@
 export * from './product/quantity-selector/';
 export * from './product/size-selector/';
 export * from './product/slideshow/';
+export * from './product/slideshow/ProductMobileSlideshow';
 
 // PRODUCTS
 export * from './products/product-grid/ProductGrid';
