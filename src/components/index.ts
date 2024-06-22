@@ -1,6 +1,7 @@
 // PRODUCT
 export * from './product/quantity-selector/';
 export * from './product/size-selector/';
+export * from './product/slideshow/';
 
 // PRODUCTS
 export * from './products/product-grid/ProductGrid';
