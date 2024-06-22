@@ -1,4 +1,5 @@
 // PRODUCT
+export * from './product/quantity-selector/';
 export * from './product/size-selector/';
 
 // PRODUCTS
