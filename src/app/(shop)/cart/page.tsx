@@ -74,7 +74,7 @@ export default function CartPage() {
             <div className="w-full mt-5 mb-2">
               <Link
                 href="/checkout/address"
-                className="flex btn-primary"
+                className="flex justify-center btn-primary"
               >
                 Checkout
               </Link>
