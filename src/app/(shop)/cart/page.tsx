@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
+// import { redirect } from "next/navigation";
 
 import { QuantitySelector, Title } from "@/components";
 
 import { initialData } from "@/seed/seed";
-import Image from "next/image";
 
 const productsInCart = [
   initialData.products[0],
@@ -12,6 +13,8 @@ const productsInCart = [
 ]
 
 export default function CartPage() {
+  // redirect('/empty');
+
   return (
     <div className="flex items-center justify-center px-10 mb-72 sm:px-0">
       <div className="flex flex-col w-[1000px]">
