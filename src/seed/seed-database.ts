@@ -15,11 +15,41 @@ async function main() {
   const { categories, products } = initialData;
   const categoriesData = categories.map((name) => ({ name }));
 
-  console.log(categoriesData)
   await prisma.category.createMany({
     data: categoriesData
   });
 
+  const categoriesDb = await prisma.category.findMany();
+
+  const categoriesMap = categoriesDb.reduce((map, category) => {
+    map[category.name.toLowerCase()] = category.id;
+
+    return map;
+  }, {} as Record<string, string>);
+
+  // Products
+  const { type, images, ...product1} = products[0];
+
+  await prisma.product.create({
+    data: {
+      ...product1,
+      categoryId: categoriesMap['shirts']
+    }
+  });
+
+  products.forEach(async (product) => {
+    const { type, images, ...rest } = product;
+
+    const dbProduct = await prisma.product.create({
+      data: {
+        ...rest,
+        categoryId: categoriesMap[capitalize(type)]
+      }
+    });
+
+    // Images
+  })
+  
   console.log('Seed executed successfully');
 };
 
