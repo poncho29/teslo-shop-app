@@ -1,6 +1,6 @@
-import prisma from '../lib/prisma';
+require('dotenv').config();
 
-import { capitalize } from '../helpers/capitalize';
+import prisma from '../lib/prisma';
 
 import { initialData } from "./seed";
 
@@ -26,22 +26,13 @@ async function main() {
   }, {} as Record<string, string>);
 
   // Products
-  const { type, images, ...product1} = products[0];
-
-  await prisma.product.create({
-    data: {
-      ...product1,
-      categoryId: categoriesMap['shirts']
-    }
-  });
-
   products.forEach(async (product) => {
     const { type, images, ...rest } = product;
 
     const dbProduct = await prisma.product.create({
       data: {
         ...rest,
-        categoryId: categoriesMap[capitalize(type)]
+        categoryId: categoriesMap[type]
       }
     });
 

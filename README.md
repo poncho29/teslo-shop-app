@@ -12,7 +12,7 @@ Este proyecto fue contruido siguiendo el curso de [NEXT.js](https://fernando-her
 1. Clonar repositorio.
 2. Instalar dependencias ```npm install```.
 3. Renombrar el archivo ```.env.template``` a ```.env``` y completar las variables.
-4. Levantar la base de datos ```docker componse up -d```.
+4. Levantar la base de datos ```docker compose up -d```.
 5. Ejecutar las migraciones de Prisma ```npx prisma migrate dev```.
 6. Ejecutar el seed ````npm run seed```.
 6. Ejecutar el proyecto ```npm run dev```.
