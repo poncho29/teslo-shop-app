@@ -5,11 +5,9 @@ import { capitalize } from '../helpers/capitalize';
 import { initialData } from "./seed";
 
 async function main() {
-  await Promise.all([
-    prisma.productImage.deleteMany(),
-    prisma.product.deleteMany(),
-    prisma.category.deleteMany(),
-  ]);
+  await prisma.productImage.deleteMany();
+  await prisma.product.deleteMany();
+  await prisma.category.deleteMany();
 
   //Categories
   const { categories, products } = initialData;
@@ -48,7 +46,15 @@ async function main() {
     });
 
     // Images
-  })
+    const imageData = images.map(image => ({
+      url: image,
+      productId: dbProduct.id
+    }));
+
+    await prisma.productImage.createMany({
+      data: imageData
+    });
+  });
   
   console.log('Seed executed successfully');
 };
