@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 import prisma from '../lib/prisma';
 
 import { initialData } from "./seed";
