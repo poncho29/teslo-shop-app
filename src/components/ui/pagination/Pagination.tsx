@@ -1,7 +1,11 @@
 'use client';
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { redirect, usePathname, useSearchParams } from "next/navigation";
+
+import clsx from "clsx";
+
+import { generatePaginationNumbers } from "@/utils";
 
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 
@@ -13,7 +17,14 @@ export const Pagination = ({ totalPages }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const currentPage = Number(searchParams.get('page')) ?? 1;
+  const pageString = searchParams.get('page') ?? 1;
+  const currentPage = isNaN(Number(pageString)) ? 1 : Number(pageString);
+
+  if (currentPage < 1 || isNaN(Number(pageString))) {
+    redirect(pathname);
+  }
+
+  const allPages = generatePaginationNumbers(currentPage, totalPages);
 
   const createPageUrl = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
@@ -36,8 +47,6 @@ export const Pagination = ({ totalPages }: Props) => {
     return `${pathname}?${params.toString()}`;
   }
 
-  console.log(currentPage, totalPages)
-
   return (
     <div className="flex text-center justify-center mt-10 mb-32">
       <nav aria-label="Page navigation example">
@@ -55,31 +64,24 @@ export const Pagination = ({ totalPages }: Props) => {
             </Link>
           </li>
 
-          <li>
-            <a
-              href="#"
-              className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-            >
-              1
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="page-link relative block py-1.5 px-3 rounded border-0 bg-blue-600 outline-none transition-all duration-300 text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-            >
-              2
-              <span className="visually-hidden"></span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-            >
-              3
-            </a>
-          </li>
+
+          {allPages.map((page, index) => (
+            <li key={`${page}-${index}`}>
+              <Link
+                href={createPageUrl(page)}
+                className={
+                  clsx(
+                    `page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none
+                    transition-all duration-300 text-gray-800 hover:text-gray-800 hover:bg-gray-200
+                    focus:shadow-none`,
+                    { 'text-white shadow-sm bg-blue-500 hover:text-white hover:bg-blue-700': page === currentPage }
+                  )
+                }
+              >
+                { page }
+              </Link>
+            </li>
+          ))}
 
           <li>
             <Link
