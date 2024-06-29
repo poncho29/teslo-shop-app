@@ -74,7 +74,7 @@ export const Pagination = ({ totalPages }: Props) => {
                     `page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none
                     transition-all duration-300 text-gray-800 hover:text-gray-800 hover:bg-gray-200
                     focus:shadow-none`,
-                    { 'text-white shadow-sm bg-blue-500 hover:text-white hover:bg-blue-700': page === currentPage }
+                    { '!text-white !shadow-sm !bg-blue-500 hover:!text-white hover:!bg-blue-700': page === currentPage }
                   )
                 }
               >
