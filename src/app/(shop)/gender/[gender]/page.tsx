@@ -1,10 +1,12 @@
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import { Gender } from "@prisma/client";
 
 import { Pagination, ProductGrid, Title } from "@/components";
 
 import { getPaginatedProductsWithImages } from "@/actions";
+
+export const revalidate = 60;
 
 const labels: Record<string, string> = {
   'men': 'Hombres',
@@ -35,8 +37,6 @@ export default async function GenderDetailPage({ params, searchParams }: Props) 
   if (products.length === 0) {
     redirect(`/gender/${gender}`);
   }
-
-  // if (id === 'kids') notFound();
   
   return (
     <>

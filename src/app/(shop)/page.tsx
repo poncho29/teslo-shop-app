@@ -4,6 +4,8 @@ import { getPaginatedProductsWithImages } from "@/actions";
 
 import { Pagination, ProductGrid, Title } from "@/components";
 
+export const revalidate = 60;
+
 interface Props {
   searchParams: {
     page?: string;
