@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 
+import { getProductBySlug } from "@/actions";
+
 import { titleFont } from "@/config/fonts";
 
 import { 
@@ -9,7 +11,7 @@ import {
   SizeSelector
 } from "@/components";
 
-import { initialData } from "@/seed/seed";
+export const revalidate = 604800; // 7 days
 
 interface Props {
   params: {
@@ -17,9 +19,9 @@ interface Props {
   }
 }
 
-export default function ProductPage({ params }: Props) {
+export default async function ProductPage({ params }: Props) {
   const { slug } = params;
-  const product = initialData.products.find(product => product.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) notFound();
 
