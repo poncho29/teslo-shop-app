@@ -8,7 +8,8 @@ import {
   ProductMobileSlideshow,
   ProductSlideshow,
   QuantitySelector,
-  SizeSelector
+  SizeSelector,
+  StockLabel
 } from "@/components";
 
 export const revalidate = 604800; // 7 days
@@ -42,6 +43,7 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       <div className="col-span-1 px-5">
+        <StockLabel slug={slug} />
         <h1
           className={`${titleFont.className} antialiased font-bold text-xl`}
         >
