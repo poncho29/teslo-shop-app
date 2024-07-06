@@ -7,8 +7,6 @@ import { titleFont } from "@/config/fonts";
 import { 
   ProductMobileSlideshow,
   ProductSlideshow,
-  QuantitySelector,
-  SizeSelector,
   StockLabel
 } from "@/components";
 import { AddToCart } from "./ui/AddToCart";
