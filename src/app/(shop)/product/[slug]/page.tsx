@@ -11,6 +11,7 @@ import {
   SizeSelector,
   StockLabel
 } from "@/components";
+import { AddToCart } from "./ui/AddToCart";
 
 export const revalidate = 604800; // 7 days
 
@@ -52,16 +53,7 @@ export default async function ProductPage({ params }: Props) {
 
         <p className="text-lg mb-5">${ product.price }</p>
 
-        <SizeSelector
-          selectedSize={product.sizes[0]}
-          availableSizes={product.sizes}
-        />
-
-        <QuantitySelector quantity={0} />
-
-        <button className="btn-primary my-5">
-          Agregar al carrito
-        </button>
+        <AddToCart product={product} />
 
         <h3 className="text-sm font-bold">Descripción</h3>
         <p className="font-light">

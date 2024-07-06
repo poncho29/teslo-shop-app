@@ -1,11 +1,14 @@
-import { type Size } from "@/interfaces"
 import clsx from "clsx";
+
+import { type Size } from "@/interfaces"
 
 interface Props {
   selectedSize?: Size;
   availableSizes: Size[];
+  onChangeSize: (size: Size) => void;
 }
-export const SizeSelector = ({ selectedSize, availableSizes }: Props) => {
+
+export const SizeSelector = ({ selectedSize, availableSizes, onChangeSize }: Props) => {
   return (
     <div className="my-5">
       <h3 className="font-bold mb-4">Tallas disponibles</h3>
@@ -20,6 +23,7 @@ export const SizeSelector = ({ selectedSize, availableSizes }: Props) => {
                 {'underline': size === selectedSize}
               )
             }
+            onClick={() => onChangeSize(size)}
           >
             { size }
           </button>
